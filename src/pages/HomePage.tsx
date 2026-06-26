@@ -54,7 +54,7 @@ export default function HomePage() {
             <span className="italic text-canvas/90">We craft your home.</span>
           </h1>
 
-          <p className="text-stone-light text-base sm:text-lg font-sans font-light max-w-2xl mx-auto mb-14 leading-relaxed opacity-0-start animate-fade-in-up delay-600">
+          <p className="text-canvas/90 text-base sm:text-lg font-sans font-light max-w-2xl mx-auto mb-14 leading-relaxed opacity-0-start animate-fade-in-up delay-600">
             Curating spaces that balance spatial poetry with turnkey engineering
             precision. Residential, commercial & holiday homes across Mumbai.
           </p>
@@ -211,7 +211,7 @@ export default function HomePage() {
             <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl font-light text-canvas tracking-wide mb-10">
               Ready to Transform Your Space?
             </h2>
-            <p className="text-stone-light text-sm sm:text-base font-sans font-light max-w-xl mx-auto leading-relaxed mb-12">
+            <p className="text-stone text-sm sm:text-base font-sans font-light max-w-xl mx-auto leading-relaxed mb-12">
               Our Principal Architect is available to discuss your vision,
               timeline, and budget. Schedule a complimentary design consultation
               today.

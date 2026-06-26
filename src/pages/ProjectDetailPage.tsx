@@ -51,7 +51,7 @@ export default function ProjectDetailPage() {
           <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-canvas tracking-wide mb-3">
             {project.title}
           </h1>
-          <p className="text-stone-light text-sm font-sans font-light italic">
+          <p className="text-canvas/80 text-sm font-sans font-light italic">
             {project.location}
           </p>
         </div>
