@@ -36,16 +36,12 @@ export default function Navbar() {
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between h-20 lg:h-24">
           <Link to="/" className="flex items-center">
-            {/* Charcoal container for white logo - elegant high contrast */}
-            <div className="bg-charcoal px-5 py-2.5 flex items-center gap-3">
-              <div className="w-7 h-7 border border-canvas/30 rounded-full flex items-center justify-center">
-                <span className="font-serif text-canvas text-sm font-light tracking-wide">
-                  S
-                </span>
-              </div>
-              <span className="font-serif text-canvas text-base font-light tracking-widest">
-                SIGMA
-              </span>
+            <div className="bg-charcoal px-5 py-3">
+              <img
+                src="/assets/Sigma_Logo.png"
+                alt="Sigma Logo"
+                className="h-10 md:h-12 w-auto object-contain"
+              />
             </div>
           </Link>
 
@@ -60,8 +56,8 @@ export default function Navbar() {
                     active
                       ? "text-gold"
                       : scrolled
-                      ? "text-charcoal/70 hover:text-gold"
-                      : "text-canvas/80 hover:text-gold"
+                        ? "text-charcoal/70 hover:text-gold"
+                        : "text-canvas/80 hover:text-gold"
                   }`}
                 >
                   {link.label}
@@ -101,7 +97,9 @@ export default function Navbar() {
       {/* Mobile Overlay */}
       <div
         className={`fixed inset-0 z-40 bg-canvas transition-all duration-500 flex flex-col items-center justify-center ${
-          mobileOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+          mobileOpen
+            ? "opacity-100 visible"
+            : "opacity-0 invisible pointer-events-none"
         }`}
       >
         <nav className="flex flex-col items-center gap-10">

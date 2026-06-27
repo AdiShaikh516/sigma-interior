@@ -37,7 +37,8 @@ export default function HomePage() {
           ref={parallaxRef}
           className="absolute inset-0 bg-cover bg-center"
           style={{
-            backgroundImage: "url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1920&q=85')",
+            backgroundImage:
+              "url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1920&q=85')",
           }}
         />
         {/* Linear scrim gradient for text visibility */}
@@ -104,8 +105,8 @@ export default function HomePage() {
             </h2>
             <p className="text-stone text-sm sm:text-base font-sans font-light max-w-2xl mx-auto leading-relaxed mb-10">
               Every line we draw, every material we select, and every joint we
-              inspect is guided by a singular belief: that your space should feel
-              like a carefully edited story — not a catalogue of finishes.
+              inspect is guided by a singular belief: that your space should
+              feel like a carefully edited story — not a catalogue of finishes.
             </p>
             <Link
               to="/about"
@@ -172,12 +173,6 @@ export default function HomePage() {
                     </p>
                   </div>
                 </div>
-                {/* Info below image */}
-                <div className="pt-5">
-                  <p className="text-charcoal text-sm font-sans font-light tracking-wide">
-                    {project.category}
-                  </p>
-                </div>
               </Link>
             ))}
           </div>
@@ -195,14 +190,13 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section - Charcoal with gold accents */}
-      <section
-        ref={ctaRef}
-        className="py-28 md:py-40 bg-charcoal"
-      >
+      <section ref={ctaRef} className="py-28 md:py-40 bg-charcoal">
         <div className="max-w-4xl mx-auto px-6 lg:px-10 text-center">
           <div
             className={`transition-all duration-1000 ${
-              ctaInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              ctaInView
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 translate-y-10"
             }`}
           >
             <p className="text-gold text-xs font-sans tracking-ultra uppercase mb-8">

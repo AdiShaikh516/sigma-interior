@@ -37,21 +37,21 @@ export default function AboutPage() {
               </span>
             </h2>
             <p className="text-stone text-sm sm:text-base font-sans font-light leading-relaxed mb-6">
-              Sigma Design is not a builder. We are a turnkey interior design and
-              execution studio that treats every space as a curated editorial piece
-              — from the first sketch to the final handover.
+              Sigma Design is not a builder. We are a turnkey interior design
+              and execution studio that treats every space as a curated
+              editorial piece — from the first sketch to the final handover.
             </p>
             <p className="text-stone text-sm sm:text-base font-sans font-light leading-relaxed mb-6">
               Founded in Mumbai, we have spent decades developing a network of
-              master craftsmen, material suppliers, and project managers who share
-              our obsession with precision. Our process eliminates the friction
-              between design vision and on-site execution.
+              master craftsmen, material suppliers, and project managers who
+              share our obsession with precision. Our process eliminates the
+              friction between design vision and on-site execution.
             </p>
             <p className="text-stone text-sm sm:text-base font-sans font-light leading-relaxed">
               We source marble directly from Italian quarries, timber from
-              sustainable FSC-certified forests, and brass hardware from heritage
-              workshops. Every material is hand-selected, and every joint is
-              inspected.
+              sustainable FSC-certified forests, and brass hardware from
+              heritage workshops. Every material is hand-selected, and every
+              joint is inspected.
             </p>
           </div>
 
@@ -103,7 +103,9 @@ export default function AboutPage() {
         <div
           ref={quoteRef}
           className={`text-center py-24 border-t border-b border-charcoal/5 transition-all duration-1000 ${
-            quoteInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            quoteInView
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-10"
           }`}
         >
           <h2 className="font-serif text-3xl md:text-4xl font-light text-charcoal tracking-wide leading-tight max-w-3xl mx-auto">

@@ -1,16 +1,9 @@
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useInView } from "../hooks/useInView";
-import { projects, categories, type Project } from "../lib/data";
+import { projects, type Project } from "../lib/data";
 
 export default function PortfolioPage() {
-  const [activeCategory, setActiveCategory] = useState<string>("All");
   const { ref: headerRef, inView: headerInView } = useInView(0.15);
-
-  const filtered =
-    activeCategory === "All"
-      ? projects
-      : projects.filter((p) => p.category === activeCategory);
 
   return (
     <div className="pt-28 md:pt-36 pb-28 md:pb-40 bg-canvas min-h-screen">
@@ -19,7 +12,9 @@ export default function PortfolioPage() {
         <div
           ref={headerRef}
           className={`text-center mb-20 transition-all duration-1000 ${
-            headerInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            headerInView
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-10"
           }`}
         >
           <p className="text-gold text-xs font-sans tracking-ultra uppercase mb-5">
@@ -35,30 +30,16 @@ export default function PortfolioPage() {
         </div>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-4 mb-16">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => setActiveCategory(cat)}
-              className={`px-6 py-3 text-xs font-sans tracking-ultra uppercase border transition-all duration-300 ${
-                activeCategory === cat
-                  ? "border-gold text-gold"
-                  : "border-charcoal/10 text-stone hover:border-charcoal/20 hover:text-charcoal"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
+        <div className="flex flex-wrap justify-center gap-4 mb-16"></div>
 
         {/* Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filtered.map((project, i) => (
+          {projects.map((project, i) => (
             <ProjectCard
               key={project.id}
               project={project}
               index={i}
-              isLarge={i === 0 && activeCategory === "All"}
+              isLarge={false}
             />
           ))}
         </div>
@@ -111,12 +92,6 @@ function ProjectCard({
             <p className="text-gold text-xs font-sans tracking-ultra uppercase mt-3">
               {project.location}
             </p>
-          </div>
-          {/* Category badge */}
-          <div className="absolute top-5 left-5 bg-canvas/90 backdrop-blur-sm px-4 py-1.5">
-            <span className="text-charcoal/70 text-xs font-sans tracking-ultra uppercase">
-              {project.category}
-            </span>
           </div>
         </div>
       </Link>

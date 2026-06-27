@@ -9,20 +9,17 @@ export default function Footer() {
           <div>
             <div className="flex items-center mb-8">
               {/* Charcoal container for white logo */}
-              <div className="bg-charcoal px-4 py-2 flex items-center gap-3">
-                <div className="w-7 h-7 border border-canvas/30 rounded-full flex items-center justify-center">
-                  <span className="font-serif text-canvas text-sm font-light tracking-wide">
-                    S
-                  </span>
-                </div>
-                <span className="font-serif text-canvas text-base font-light tracking-widest">
-                  SIGMA
-                </span>
+              <div className="bg-charcoal px-5 py-3">
+                <img
+                  src="/assets/Sigma_Logo.png"
+                  alt="Sigma Logo"
+                  className="h-10 md:h-12 w-auto object-contain"
+                />
               </div>
             </div>
             <p className="text-stone text-sm font-sans font-light leading-relaxed max-w-sm">
-              Curating turnkey luxury interiors with decades of engineering
-              precision. Mumbai, Alibaug & Lonavala.
+              Curating luxury interiors with decades of engineering precision.
+              Mumbai, Alibaug & Lonavala.
             </p>
           </div>
 
@@ -78,7 +75,7 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Sigma Design. All rights reserved.
           </p>
           <p className="text-stone-muted text-xs font-sans font-light">
-            Turnkey Luxury Interior Designers in Mumbai
+            Luxury Interior Designers in Mumbai
           </p>
         </div>
       </div>
