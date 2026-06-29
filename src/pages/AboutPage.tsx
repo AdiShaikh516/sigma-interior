@@ -1,10 +1,22 @@
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { useInView } from "../hooks/useInView";
 import { Link } from "react-router-dom";
+import { Instagram, Mail } from "lucide-react";
 
 export default function AboutPage() {
   const { ref: leftRef, inView: leftInView } = useInView(0.15);
   const { ref: rightRef, inView: rightInView } = useInView(0.15);
   const { ref: quoteRef, inView: quoteInView } = useInView(0.15);
+  const { ref: architectRef, inView: architectInView } = useInView(0.15);
+  const parallaxImageRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: parallaxImageRef,
+    offset: ["start end", "end start"],
+  });
+
+  const y = useTransform(scrollYProgress, [0, 1], [-150, 150]);
 
   return (
     <div className="pt-28 md:pt-36 pb-28 md:pb-40 bg-canvas min-h-screen">
@@ -95,6 +107,107 @@ export default function AboutPage() {
               <p className="text-charcoal text-sm font-sans font-light tracking-wide">
                 Turnkey Delivery
               </p>
+            </div>
+          </div>
+        </div>
+
+        {/* Principal Architect Section */}
+        <div
+          ref={architectRef}
+          className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start mb-28 transition-all duration-1000 ${
+            architectInView
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-10"
+          }`}
+        >
+          {/* Left: Heading and Social Links */}
+          <div className="order-2 lg:order-1">
+            <p className="text-gold text-xs font-sans tracking-ultra uppercase mb-5">
+              Leadership
+            </p>
+            <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-light text-gold tracking-wide leading-none">
+              Shafayee Shaikh
+            </h2>
+
+            <p className="mt-3 text-sm sm:text-base font-sans font-light tracking-[0.28em] uppercase text-stone">
+              Principal Architect
+            </p>
+
+            <br />
+
+            {/* Social Links */}
+            <div className="space-y-4 mb-10">
+              <a
+                href="https://www.instagram.com/shafayeeshaikh"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 text-stone hover:text-gold transition-colors duration-300 group"
+              >
+                <div className="w-10 h-10 border border-charcoal/10 flex items-center justify-center group-hover:border-gold transition-colors duration-300">
+                  <Instagram size={18} />
+                </div>
+                <span className="text-sm font-sans font-light tracking-wide">
+                  @shafayeeshaikh
+                </span>
+              </a>
+              <a
+                href="mailto:sigmaconstruction1991@gmail.com"
+                className="flex items-center gap-4 text-stone hover:text-gold transition-colors duration-300 group"
+              >
+                <div className="w-10 h-10 border border-charcoal/10 flex items-center justify-center group-hover:border-gold transition-colors duration-300">
+                  <Mail size={18} />
+                </div>
+                <span className="text-sm font-sans font-light tracking-wide">
+                  sigmaconstruction1991@gmail.com
+                </span>
+              </a>
+            </div>
+
+            {/* Architect Bio */}
+            <div className="space-y-5">
+              <p className="text-stone text-sm sm:text-base font-sans font-light leading-relaxed">
+                Shafayee Shaikh is a Mumbai-based Principal Architect and the
+                creative force behind Sigma Construction. With a deep-rooted
+                passion for spatial design and an unwavering commitment to
+                excellence, he has spent years shaping luxury interiors that
+                seamlessly blend form with function.
+              </p>
+              <p className="text-stone text-sm sm:text-base font-sans font-light leading-relaxed">
+                His design philosophy centers on the belief that every space
+                tells a story — one that should be crafted with intention,
+                precision, and an intimate understanding of how people live.
+                From initial concept to final handover, Shafayee ensures that
+                each project reflects the unique vision of its inhabitants while
+                maintaining the highest standards of craftsmanship.
+              </p>
+              <p className="text-stone text-sm sm:text-base font-sans font-light leading-relaxed">
+                Under his leadership, Sigma has delivered over 340 projects
+                across Mumbai, Alibaug, and Lonavala, earning a reputation for
+                turnkey execution that transforms raw spaces into curated
+                sanctuaries.
+              </p>
+              <p className="text-stone text-sm sm:text-base font-sans font-light leading-relaxed">
+                When not immersed in design, Shafayee can be found exploring
+                architectural heritage sites, mentoring emerging designers, and
+                sourcing rare materials from artisans across the globe.
+              </p>
+            </div>
+          </div>
+
+          {/* Right: Image with Parallax */}
+          <div className="order-1 lg:order-2">
+            <div
+              ref={parallaxImageRef}
+              className="relative overflow-hidden rounded-3xl h-[550px] lg:h-[700px]"
+            >
+              <motion.img
+                src="/assets/ar-shafayee-shaikh.png"
+                alt="Shafayee Shaikh - Principal Architect"
+                width={1200}
+                height={788}
+                style={{ y }}
+                className="absolute inset-0 w-full h-[120%] object-cover rounded-3xl will-change-transform"
+              />
             </div>
           </div>
         </div>
