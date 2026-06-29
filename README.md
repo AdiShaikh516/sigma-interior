@@ -1,6 +1,9 @@
 # Sigma Interior
 
-A modern, responsive interior design website built with **React**, **TypeScript**, **Vite**, and **Tailwind CSS**. The project is designed for fast development, optimized production builds, and a smooth user experience with animations powered by Framer Motion.
+A modern, responsive interior design website built with **React**,
+**TypeScript**, **Vite**, and **Tailwind CSS**. The project is designed
+for fast development, optimized production builds, and a smooth user
+experience with animations powered by Framer Motion.
 
 ---
 
@@ -12,8 +15,8 @@ A modern, responsive interior design website built with **React**, **TypeScript*
 - Tailwind CSS
 - React Router DOM
 - Framer Motion
-- Supabase
 - Lucide React Icons
+- EmailJS
 - ESLint
 
 ---
@@ -39,7 +42,7 @@ npm -v
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/abdulsamea/sigma-interior.git
+git clone https://github.com/adishaikh516/sigma-interior.git
 ```
 
 ### 2. Navigate to the project directory
@@ -58,106 +61,133 @@ npm install
 
 ## ⚙️ Environment Variables
 
-If the project uses Supabase or other external services, create a `.env` file in the project root.
-
-Example:
+Create a `.env` file in the project root.
 
 ```env
-VITE_SUPABASE_URL=your_supabase_url
-VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+VITE_EMAILJS_SERVICE_ID=your_service_id
+VITE_EMAILJS_TEMPLATE_ID=your_template_id
+VITE_EMAILJS_PUBLIC_KEY=your_public_key
 ```
 
-> **Note:** Only variables prefixed with `VITE_` are exposed to the client in Vite applications.
+> **Note:** Only variables prefixed with `VITE_` are exposed to the
+> client in Vite applications.
+
+Restart the development server after creating or updating the `.env`
+file.
 
 ---
 
-# 🛠️ Available Commands
+# 📧 EmailJS Setup
 
-## Start Development Server
+The consultation form uses **EmailJS** to send enquiry emails directly
+from the client without requiring a backend server.
 
-Runs the application in development mode with Hot Module Replacement (HMR).
+## 1. Create an EmailJS Account
+
+Visit:
+
+https://www.emailjs.com/
+
+## 2. Add an Email Service
+
+- Open **Email Services**
+- Click **Add New Service**
+- Connect your email provider (Gmail, Outlook, Zoho, etc.)
+- Copy the generated **Service ID**
+
+## 3. Create an Email Template
+
+Navigate to:
+
+**Email Templates → Create New Template**
+
+Example subject:
+
+```text
+New Consultation Request from {{name}}
+```
+
+Example body:
+
+```text
+A new consultation request has been received.
+
+Full Name: {{name}}
+Email: {{email}}
+Phone: {{phone}}
+
+Project Type: {{project_type}}
+Design Style: {{style}}
+Timeline: {{timeline}}
+```
+
+Save the template and copy the **Template ID**.
+
+## 4. Get Your Public Key
+
+Go to:
+
+**Account → API Keys**
+
+Copy your **Public Key**.
+
+## 5. Configure Environment Variables
+
+```env
+VITE_EMAILJS_SERVICE_ID=service_xxxxxxx
+VITE_EMAILJS_TEMPLATE_ID=template_xxxxxxx
+VITE_EMAILJS_PUBLIC_KEY=xxxxxxxxxxxxxxxx
+```
+
+## 6. Install EmailJS
+
+```bash
+npm install @emailjs/browser
+```
+
+## 7. Test
 
 ```bash
 npm run dev
 ```
 
-The application will be available at:
-
-```
-http://localhost:5173
-```
+Submit the consultation form and verify that the email arrives in the
+configured inbox.
 
 ---
 
-## Build for Production
+# 🛠️ Available Commands
 
-Creates an optimized production build.
-
-```bash
-npm run build
-```
-
-The compiled files will be generated inside the `dist/` directory.
+Command Description
 
 ---
 
-## Preview Production Build
-
-Serves the production build locally for testing.
-
-```bash
-npm run preview
-```
-
-This command should be run after building the project.
-
-```bash
-npm run build
-npm run preview
-```
-
----
-
-## Run ESLint
-
-Checks the project for linting issues.
-
-```bash
-npm run lint
-```
-
-Use this before committing your changes to maintain code quality.
-
----
-
-## Run TypeScript Type Checking
-
-Performs static type checking without generating any output files.
-
-```bash
-npm run typecheck
-```
-
-This helps identify TypeScript errors during development.
+`npm install` Install dependencies
+`npm run dev` Start development server
+`npm run build` Build for production
+`npm run preview` Preview production build
+`npm run lint` Run ESLint
+`npm run typecheck` Run TypeScript type checking
+`npm run deploy` Deploy to GitHub Pages
 
 ---
 
 # 📁 Project Structure
 
-```
+```text
 sigma-interior/
 │
-├── public/                 # Static assets
+├── public/
 ├── src/
-│   ├── assets/             # Images, icons, fonts
-│   ├── components/         # Reusable UI components
-│   ├── pages/              # Application pages
-│   ├── hooks/              # Custom React hooks
-│   ├── lib/                # Utility functions
-│   ├── styles/             # Global styles
+│   ├── assets/
+│   ├── components/
+│   ├── hooks/
+│   ├── pages/
+│   ├── styles/
 │   ├── App.tsx
 │   └── main.tsx
 │
+├── .env.example
 ├── .env
 ├── package.json
 ├── tsconfig.json
@@ -165,41 +195,15 @@ sigma-interior/
 └── README.md
 ```
 
-> Folder names may vary depending on project requirements.
-
 ---
 
 # 🚀 Development Workflow
 
-Start the development server:
-
 ```bash
 npm run dev
-```
-
-Make your changes.
-
-Run linting:
-
-```bash
 npm run lint
-```
-
-Run type checking:
-
-```bash
 npm run typecheck
-```
-
-Build the project:
-
-```bash
 npm run build
-```
-
-Preview the production build:
-
-```bash
 npm run preview
 ```
 
@@ -207,99 +211,136 @@ npm run preview
 
 # 📦 Production Build
 
-Generate an optimized production build:
-
 ```bash
 npm run build
 ```
 
-Preview it locally:
+The production-ready files are generated inside:
 
-```bash
-npm run preview
-```
-
-The production-ready files are located in:
-
-```
+```text
 dist/
 ```
 
-These files can be deployed to platforms such as:
+---
+
+# 🌐 GitHub Pages Deployment
+
+## Install gh-pages
+
+```bash
+npm install --save-dev gh-pages
+```
+
+## Update package.json
+
+```json
+{
+  "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+  }
+}
+```
+
+## Configure Vite
+
+Repository page:
+
+```ts
+base: "/repository-name/";
+```
+
+Custom domain:
+
+```ts
+base: "/";
+```
+
+## Deploy
+
+```bash
+npm run deploy
+```
+
+## Configure GitHub Pages
+
+Repository →
+
+**Settings → Pages**
+
+- Source: Deploy from a branch
+- Branch: `gh-pages`
+- Folder: `/ (root)`
+
+## Custom Domain
+
+Create:
+
+```text
+public/CNAME
+```
+
+Contents:
+
+```text
+sigmaconstruction.in
+```
+
+Configure your DNS records to point to GitHub Pages and enable HTTPS
+after DNS propagation.
+
+---
+
+# ☁️ Other Deployment Options
+
+The generated `dist/` folder can also be deployed to:
 
 - Vercel
 - Netlify
 - AWS S3 + CloudFront
 - Firebase Hosting
-- GitHub Pages
+- Cloudflare Pages
 - Any static web hosting provider
 
 ---
 
 # 🌿 Git Workflow
 
-Create a new branch:
-
 ```bash
 git checkout -b feature/your-feature
-```
 
-Commit your changes:
-
-```bash
 git add .
+
 git commit -m "Add your feature"
-```
 
-Push your branch:
-
-```bash
 git push origin feature/your-feature
 ```
 
-Open a Pull Request for review.
+Then open a Pull Request.
 
 ---
 
 # 📚 Key Dependencies
 
-| Package          | Purpose                             |
-| ---------------- | ----------------------------------- |
-| React            | UI Library                          |
-| TypeScript       | Static typing                       |
-| Vite             | Development server and bundler      |
-| Tailwind CSS     | Utility-first CSS framework         |
-| React Router DOM | Client-side routing                 |
-| Framer Motion    | Animations                          |
-| Supabase         | Backend services and authentication |
-| Lucide React     | Icon library                        |
-| ESLint           | Code quality and linting            |
+Package Purpose
 
 ---
 
-# 📜 Scripts Summary
-
-| Command             | Description                                   |
-| ------------------- | --------------------------------------------- |
-| `npm install`       | Install project dependencies                  |
-| `npm run dev`       | Start the Vite development server             |
-| `npm run build`     | Build the application for production          |
-| `npm run preview`   | Preview the production build locally          |
-| `npm run lint`      | Run ESLint to identify code quality issues    |
-| `npm run typecheck` | Run the TypeScript compiler for type checking |
+React UI Library
+TypeScript Static typing
+Vite Build tool
+Tailwind CSS Styling
+React Router DOM Routing
+Framer Motion Animations
+EmailJS Contact form emails
+Lucide React Icons
+ESLint Code quality
 
 ---
 
 # 🧹 Code Quality
 
-Before creating a Pull Request, ensure:
-
-- The application builds successfully.
-- ESLint reports no issues.
-- TypeScript type checking passes.
-- The application works as expected in the browser.
-
-Recommended commands:
+Before pushing changes:
 
 ```bash
 npm run lint
@@ -307,22 +348,24 @@ npm run typecheck
 npm run build
 ```
 
+Ensure:
+
+- The project builds successfully.
+- ESLint reports no issues.
+- TypeScript reports no errors.
+
 ---
 
 # 🤝 Contributing
 
-Contributions are welcome.
-
-1. Fork the repository.
-2. Create a new feature branch.
-3. Commit your changes.
-4. Push your branch.
-5. Submit a Pull Request.
+1.  Fork the repository.
+2.  Create a feature branch.
+3.  Commit your changes.
+4.  Push the branch.
+5.  Open a Pull Request.
 
 ---
 
 # 📄 License
 
 This project is licensed under the MIT License.
-
----

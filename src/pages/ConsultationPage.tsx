@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useInView } from "../hooks/useInView";
 import { Check, ArrowRight, ArrowLeft } from "lucide-react";
+import emailjs from "@emailjs/browser";
 
 const steps = [
   {
@@ -40,8 +41,11 @@ export default function ConsultationPage() {
   const isLastStep = currentStep === steps.length - 1;
   const isFirstStep = currentStep === 0;
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const canProceed = isLastStep
-    ? step.fields?.every((f) => answers[f.name]?.trim())
+    ? step.fields?.every((f) => answers[f.name]?.trim()) &&
+      emailRegex.test(answers.email || "")
     : !!answers[step.question];
 
   const handleOption = (option: string) => {
@@ -66,10 +70,45 @@ export default function ConsultationPage() {
 
   const handleSubmit = async () => {
     if (!canProceed) return;
+
+    if (!/^\d{10}$/.test(answers.phone)) {
+      alert("Please enter a valid 10-digit phone number.");
+      setIsSubmitting(false);
+      return;
+    }
+
     setIsSubmitting(true);
-    await new Promise((r) => setTimeout(r, 1200));
-    setIsSubmitting(false);
-    setSubmitted(true);
+
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          name: answers.name,
+          email: answers.email,
+          phone: answers.phone,
+
+          project_type: answers["What is your project type?"],
+
+          style: answers["What style defines you?"],
+
+          timeline: answers["What is your target timeline?"],
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      );
+
+      setSubmitted(true);
+
+      setAnswers({});
+      setCurrentStep(0);
+    } catch (err) {
+      console.error(err);
+      alert(
+        "Unable to submit your request. Please try again in a few minutes.",
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -78,7 +117,9 @@ export default function ConsultationPage() {
         <div
           ref={headerRef}
           className={`text-center mb-20 transition-all duration-1000 ${
-            headerInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+            headerInView
+              ? "opacity-100 translate-y-0"
+              : "opacity-0 translate-y-10"
           }`}
         >
           <p className="text-gold text-xs font-sans tracking-ultra uppercase mb-5">
